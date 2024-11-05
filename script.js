@@ -10,6 +10,9 @@ let hpDisplay = document.querySelector(".hp-text span");
 // Get our enemy fungus
 let enemy = document.querySelector(".freaky-fungus");
 
+// Get our attack buttons
+let attackButtons = document.querySelectorAll(".attacks button");
+
 // Create function to handle attacks
 function attack(type) {
 
@@ -19,11 +22,11 @@ function attack(type) {
       attackPoints -= 12;
       hitPoints -= 14;
       break;
-    case "entangle":
+    case "entangle": // kill yourself
       attackPoints -= 23;
       hitPoints -= 9;
       break;
-    case "dragon-blade":
+    case "dragon-blade": // kill the monster
       attackPoints -= 38;
       hitPoints -= 47;
       break;
@@ -41,10 +44,20 @@ function attack(type) {
     hitPoints = 0;
   }
 
-  // Handle the death of our enemy by changing a class
+  // When enemy HP is 0 then change a class that shows it dying 🧙🏽‍♂️
   if (hitPoints === 0) {
     enemy.classList.remove("walk");
     enemy.classList.add("dead");
+  }
+
+  // If we run out of AP then disable the attack buttons and make
+  // our enemy jump for joy 🍄
+  if (attackPoints === 0) {
+    for (const button of attackButtons) {
+      button.setAttribute("disabled", "disabled");
+    }
+    enemy.classList.remove("walk");
+    enemy.classList.add("jump");
   }
 
   // Render AP and HP output on screen
