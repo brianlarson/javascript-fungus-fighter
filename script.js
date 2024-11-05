@@ -1,19 +1,19 @@
 
 // Set vars to track enemy hit points as well as our attack points
-let hitPoints = 100;
 let attackPoints = 100;
+let hitPoints = 100;
 
 // Get AP and HP elements
-let attackPointsDisplay = document.querySelector(".ap-text span");
-let hitPointsDisplay = document.querySelector(".hp-text span");
+let apDisplay = document.querySelector(".ap-text span");
+let hpDisplay = document.querySelector(".hp-text span");
 
-console.log(attackPointsDisplay);
-console.log(hitPointsDisplay);
+// Get our enemy fungus
+let enemy = document.querySelector(".freaky-fungus");
 
-// Create function to handle attacks and handle AP and HP
+// Create function to handle attacks
 function attack(type) {
 
-  // Check for attack type and adjust AP and HP accordingly
+  // Check for attack type and update AP and HP
   switch (type) {
     case "arcane-scepter":
       attackPoints -= 12;
@@ -33,7 +33,7 @@ function attack(type) {
       break;
   }
 
-  // Handle AP and HP values falling below 0 and force to 0
+  // Prevent AP and HP values falling below 0
   if (attackPoints < 0) {
     attackPoints = 0;
   }
@@ -41,12 +41,14 @@ function attack(type) {
     hitPoints = 0;
   }
 
-  // Update AP and HP outputs on screen
-  attackPointsDisplay.innerText = attackPoints;
-  hitPointsDisplay.innerText = hitPoints;
+  // Handle the death of our enemy by changing a class
+  if (hitPoints === 0) {
+    enemy.classList.remove("walk");
+    enemy.classList.add("dead");
+  }
 
-  // Output AP and HP to console
-  console.log(`attackPoints`, attackPoints);
-  console.log(`hitPoints`, hitPoints);
+  // Render AP and HP output on screen
+  apDisplay.innerText = attackPoints;
+  hpDisplay.innerText = hitPoints;
 
 }
