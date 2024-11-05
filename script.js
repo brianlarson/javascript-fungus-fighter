@@ -1,20 +1,9 @@
-// State Variables can be declared outside of the onReady
-// Feel free to make this to what you want!
-// Example:
-// let fungusHP = 100;
 
-function onReady() {
-    console.log("Ready to go!")
-    
-    // Make sure you check the index.html file! 
-    // There are lots of buttons and things ready for you to hook into here!
-    
-    
-    // 🧠 Remember
-    // - Handle events that ->
-    // - Updates state which is ->
-    // - Rendered to the DOM
+// Set vars to track enemy hit points as well as our attack points
+let enemyHitPoints = 100;
+let attackPoints = 100;
+
+// Create function to handle attacks
+function attack(type, cost, damage) {
+  console.log(`attack function called`);
 }
-
-
-onReady()
