@@ -5,6 +5,8 @@ let attackPoints = 100;
 
 // Create function to handle attacks and handle AP and HP
 function attack(type) {
+
+  // Check for attack type and adjust AP and HP accordingly
   switch (type) {
     case "arcane-scepter":
       attackPoints -= 12;
@@ -23,12 +25,17 @@ function attack(type) {
       hitPoints -= 25;
       break;
   }
+
+  // Handle AP and HP values falling below 0 and force to 0
   if (attackPoints < 0) {
     attackPoints = 0;
   }
   if (hitPoints < 0) {
     hitPoints = 0;
   }
+
+  // Output AP and HP to console
   console.log(`attackPoints`, attackPoints);
   console.log(`hitPoints`, hitPoints);
+
 }
