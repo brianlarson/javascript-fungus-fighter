@@ -3,6 +3,13 @@
 let hitPoints = 100;
 let attackPoints = 100;
 
+// Get AP and HP elements
+let attackPointsDisplay = document.querySelector(".ap-text span");
+let hitPointsDisplay = document.querySelector(".hp-text span");
+
+console.log(attackPointsDisplay);
+console.log(hitPointsDisplay);
+
 // Create function to handle attacks and handle AP and HP
 function attack(type) {
 
@@ -33,6 +40,10 @@ function attack(type) {
   if (hitPoints < 0) {
     hitPoints = 0;
   }
+
+  // Update AP and HP outputs on screen
+  attackPointsDisplay.innerText = attackPoints;
+  hitPointsDisplay.innerText = hitPoints;
 
   // Output AP and HP to console
   console.log(`attackPoints`, attackPoints);
