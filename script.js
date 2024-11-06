@@ -3,15 +3,19 @@
 let attackPoints = 100;
 let hitPoints = 100;
 
-// Get AP and HP elements
+// Get AP and HP values
 let apDisplay = document.querySelector(".ap-text span");
 let hpDisplay = document.querySelector(".hp-text span");
 
-// Get our enemy fungus
+// Get our enemy fungus element
 let enemy = document.querySelector(".freaky-fungus");
 
-// Get our attack buttons
+// Get our attack buttons in an array
 let attackButtons = document.querySelectorAll(".attacks button");
+
+// Get progress bars
+let apProgressBar = document.querySelector("#ap-meter");
+let hpProgressBar = document.querySelector("#hp-meter");
 
 // Create function to handle attacks
 function attack(type) {
@@ -22,11 +26,11 @@ function attack(type) {
       attackPoints -= 12;
       hitPoints -= 14;
       break;
-    case "entangle": // kill yourself
+    case "entangle":
       attackPoints -= 23;
       hitPoints -= 9;
       break;
-    case "dragon-blade": // kill the monster
+    case "dragon-blade":
       attackPoints -= 38;
       hitPoints -= 47;
       break;
@@ -34,6 +38,8 @@ function attack(type) {
       attackPoints -= 33;
       hitPoints -= 25;
       break;
+    default:
+      console.log(`No attack type defined`);
   }
 
   // Prevent AP and HP values falling below 0
@@ -44,24 +50,33 @@ function attack(type) {
     hitPoints = 0;
   }
 
-  // When enemy HP is 0 then change a class that shows it dying 🧙🏽‍♂️
+  // When enemy HP is 0 then change a class that shows it dying
   if (hitPoints === 0) {
     enemy.classList.remove("walk");
     enemy.classList.add("dead");
+    disableAttackButtons();
   }
 
-  // If we run out of AP then disable the attack buttons and make
-  // our enemy jump for joy 🍄
+  // When AP is 0 disable attack buttons and show enemy jumping
   if (attackPoints === 0) {
-    for (const button of attackButtons) {
-      button.setAttribute("disabled", "disabled");
-    }
     enemy.classList.remove("walk");
     enemy.classList.add("jump");
+    disableAttackButtons();
   }
 
-  // Render AP and HP output on screen
+  // Render AP and HP number output on screen
   apDisplay.innerText = attackPoints;
   hpDisplay.innerText = hitPoints;
 
+  // Update AP and HP progress bars
+  apProgressBar.setAttribute("value", attackPoints);
+  hpProgressBar.setAttribute("value", hitPoints);
+
+}
+
+// Create function to disable attack buttons
+function disableAttackButtons() {
+  for (const button of attackButtons) {
+    button.setAttribute("disabled", "disabled");
+  }
 }
